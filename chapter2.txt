@@ -1,4 +1,0 @@
-This is chapter 2 and i have noted,
-mv - move syntax: mv filename directory, current directory we cannot move and to indicate its .
-parent directory of current directory is ..
-codium or code to start a file syntax: codium hello.txt or .py.

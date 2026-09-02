@@ -67,3 +67,7 @@ git remote add origin or any string name:
 the nickname you're choosing for this address. It's not required or some reserved key.
 git remote -v: 
 Show me my saved address book (all remotes, with their nicknames and URLs)
+
+git rm filename1 filename2 . . . filenameN:
+removes files locally and in remote both together then git add. and git commit.
+to remove only remote files git rm --cached filenameN
