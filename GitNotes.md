@@ -1,122 +1,120 @@
-# Git Commands — My Notes
+# 👽 GLIP-GLORP TRANSMISSION: GIT ZORBIX SCROLLS 👽
 
-> 📖 **Note:** For a quick raw reference version, see [`explainGit.txt`](./explainGit.txt) — read side-by-side with this formatted guide for the best learning experience!
-
-## The Shipping Metaphor
+## Ze Shleebing Metaphor-oop
 
 ```
-git init      →  Build the warehouse (turn a plain folder into a Git repo)
-[edit files]  →  Items sitting on your desk (working directory) — on your PC/laptop
-git add       →  Load chosen items into the van (staging area)
-git commit    →  Van departs, delivery is permanently logged (repository history)
+git init      →  Blorpen ze wagoolzhouse (floopity folder becomes zog-repo!)
+[edit files]  →  Ziblets floopin' on ze desk-noop — on your grork-machine
+git add       →  Skoodle ze chosen ziblets into ze zoomvan (staging-goop)
+git commit    →  Zoomvan blastoffs, delivery blergled forever (repo-history-oop)
 ```
 
-| Command | Meaning |
+| Zorb-Command | Meanoop |
 |---|---|
-| `git status` | Right now — what's on your desk (unstaged) vs. what's currently loaded in the van (staged), before anything ships |
-| `git log` | History — every shipment that has already departed (every past commit) |
+| `git status` | Rightoop-now — whatzza on desk (un-skoodled) vs whatzza in zoomvan (skoodled), b'fore ze blast |
+| `git log` | Historoop — every zoomvan dat already blergled away (every ol' commit-goop) |
 
-- When running `git log`, it will also show `(HEAD -> main)`, which indicates which branch or which committed state you are on. It's like a stack, where the last or newly committed point is the HEAD or main branch pointer.
-- When running `git log`, it will also open a pager for scrolling through commits if there are multiple/larger commits. When `(END)` is shown, press `q` to quit out of the pager/log.
+- Runnin' `git log`, it blurps `(HEAD -> main)` — dis be showin' which branch-zorp or committ-state you floatin' on. It like a stackity-stack, where newest blergle is ze HEAD-poinger.
+- Runnin' `git log`, if big-big commits, a pager-zog opens. When `(END)` blurps, smoosh `q` to zoop outta dere.
 
 ---
 
-## `git show` — just look, nothing changes
+## `git show` — jus' peekoop, nuttin' changoop
 
 ```bash
 git show 663da2cbdfd774d6529ad1b4c7905da9f635035c:chapter3.txt
 ```
 
-- Prints what `chapter3.txt` looked like at that specific commit, to the terminal.
-- Nothing on your desk (working directory) or in the van (staging area) is touched.
-- Equivalent to: reading the old packing slip/delivery record for a specific past shipment — purely informational.
+- Splorts what `chapter3.txt` looked like at dat commit-blip, straight to terminal-goop.
+- Nuttin' on desk or zoomvan get touchoop.
+- Same-same as readin' ol' packin'-slip fo' a past zoomvan — pure informoop, no actiop.
 
-To find the right commit hash for a file first:
+Findoop right commit-hash first:
 ```bash
 git log chapter3.txt
 ```
 
 ---
 
-## `git restore` — bring an old version back to your desk
+## `git restore` — bringoop ol' version back to desk-noop
 
 ```bash
 git restore --source=663da2cbdfd774d6529ad1b4c7905da9f635035c chapter3.txt
 ```
 
-- Takes the version of `chapter3.txt` from that old commit and overwrites the current file in your working directory with it.
-- Does not touch commit history — the old commit and all commits since remain unchanged.
-- After running this, `git status` will show `chapter3.txt` as modified (it now differs from the latest commit).
-- If you want this restored version to become the new "current" version going forward, you still need to `git add chapter3.txt` + `git commit` again.
-- Equivalent to: pulling an old, already-shipped item back out of the archive and putting it back on your desk to work with again.
+- Grabsy ze ol' `chapter3.txt` version, smooshes it right over current desk-file.
+- History untouchoop — ol' commit and all after stay same-same.
+- After dis, `git status` blurps `chapter3.txt` as modifoop.
+- If you wanna keepoop dis version fo'ever, still gotta `git add` + `git commit` again.
+- Same-same as: yankin' ol' shippoop item outta archive, plunkin' it back on desk.
 
-Older equivalent syntax (same effect, predates `restore`):
+Ol'-timey syntax-goop (same effectoop, before `restore` existoop):
 ```bash
 git checkout 663da2cbdfd774d6529ad1b4c7905da9f635035c -- chapter3.txt
 ```
 
 ---
 
-## `git revert` — cancel out a commit's effect with a new commit
+## `git revert` — un-doop a commit wit' a NEW commit
 
 ```bash
 git revert 663da2cbdfd774d6529ad1b4c7905da9f635035c
 ```
 
-- Does not delete or erase the old commit — the accidental commit stays permanently in history, exactly as it was.
-- Creates a brand-new commit whose changes are the exact opposite of the target commit — so the net effect (your files, right now) look as if the accidental commit's changes were undone.
-- End result: both commits exist side by side in history forever — the original accidental one, and the new "undo" one right after it.
-- Git will open your default editor to confirm/edit the auto-generated commit message. To skip that prompt for a simple case:
+- Does NOT erasoop ol' commit — accidoop commit stays fo'ever in historoop.
+- Blorps brand-new commit dat's ze exact opposite-goop — so net-net, files look like accidoop never happenoop.
+- End-blurp: BOTH commits sit side-by-side in historoop fo'ever.
+- Zog opens default editoop to confirm message. Skoodle dat prompt:
 ```bash
 git revert --no-edit 663da2cbdfd774d6529ad1b4c7905da9f635035c
 ```
-- Safe to use even after pushing to GitHub — it doesn't rewrite shared history, it only adds to it.
-- Equivalent to: sending a new "correction" shipment that says "disregard/undo what was in that earlier shipment" — the effect is canceled, but the original shipment's record is untouched and still in the delivery logs.
+- Safe-safe even after pushoop to GitHub — no rewritoop shared historoop, only addoop.
+- Same-same as: sendin' new "correctoop" zoomvan sayin' "un-doop dat earlier shipment" — effectoop canceloop, but ol' record stays logged.
 
 ---
 
-## `git checkout` — multi-purpose command (branches AND files)
+## `git checkout` — multi-jobby zorb-command (branch-goop AND file-goop)
 
-`checkout` predates `restore`/`switch` and does several different jobs depending on how it's used — this is why it can be confusing.
+`checkout` predoop `restore`/`switch`, does buncha jobs — dis why confusoop.
 
-### a) Switching branches
+### a) Switchoop branches
 ```bash
 git checkout branch-name
 ```
-Moves you to a different branch — like switching which project timeline/delivery route you're currently working on.
+Zoops you to different branch — like switchoop which timeline-route you workin' on.
 
-### b) Creating + switching to a new branch in one step
+### b) Makin' + switchoop new branch, one-step-goop
 ```bash
 git checkout -b new-branch-name
 ```
-Equivalent to:
+Same-same as:
 ```bash
 git branch new-branch-name
 git checkout new-branch-name
 ```
 
-### c) Restoring a file to an old version (same effect as `git restore`)
+### c) Restoroop file to ol' version (same-same as `git restore`)
 ```bash
 git checkout 663da2cbdfd774d6529ad1b4c7905da9f635035c -- chapter3.txt
 ```
-Pulls `chapter3.txt`'s content from that old commit back onto the working directory — identical result to `git restore --source=...`.
+Grabsy `chapter3.txt` from ol' commit onto workin' desk-noop — identoop result to `git restore --source=...`.
 
 ---
 
 ## `git branch`
 
-- `git branch` — gives what current branch we're in.
-- `git branch "new-branch"` — a branch is just another route/timeline for the same van, starting from wherever you currently are, and from that point onward it keeps its own separate list of stops (commits) — completely independent from other branches.
-- `git checkout "new-branch"` will switch to this new branch, and so will `git checkout -b "new-branch"` (creates + switches in one step).
+- `git branch` — blurps whatzza current branch we floatin' on.
+- `git branch "new-branch"` — a branch jus' anudder route/timeline fo' same van, startoop from wherever you at, keepoop its OWN stop-list (commits) — totally separoop from odder branches.
+- `git checkout "new-branch"` zoops to dis new branch, and so does `git checkout -b "new-branch"` (makes + zoops, one-step-goop).
 
 ---
 
 ## `git remote`
 
-- `git remote` — in shipment terms: "I will give you the address to deliver or transfer the shippings/product/code to this remote address or known warehouse."
-- `git remote add` — `add` simply means: "add this address" / "this is the address for that warehouse or remote address."
-- `git remote add origin <url>` (or any string name) — the nickname you're choosing for this address. It's not required or a reserved keyword.
-- `git remote -v` — show me my saved address book (all remotes, with their nicknames and URLs).
+- `git remote` — in shippoop-speak: "I gonna give you ze address to deliveroop/transferoop ze ziblets to dis remote-address or known wagoolzhouse."
+- `git remote add` — `add` jus' means: "add dis address" / "dis be ze address fo' dat wagoolzhouse."
+- `git remote add origin <url>` (or any string-noop) — nickname you choosoop fo' dis address. Not requiroop or reservoop keyword-goop.
+- `git remote -v` — show me my saved address-book (all remotes, nicknames + URLs).
 
 ---
 
@@ -125,9 +123,34 @@ Pulls `chapter3.txt`'s content from that old commit back onto the working direct
 ```bash
 git rm filename1 filename2 ... filenameN
 ```
-Removes files locally and in remote — both together — then `git add` and `git commit` (to ship the removal).
+Removoop files local AND remote — bofe togedder — den `git add` + `git commit` (to shippoop ze removal).
 
-To remove only from remote (keep local files):
+Removoop only from remote (keepoop local):
 ```bash
 git rm --cached filenameN
 ```
+
+## `.gitignore` zorb-file
+when a .gitignoroop file be makoop, we mentoop what files we don' wanna pushoop into GitHub-goop, ex: .env files, node_module folder-noop, and on mac DS_Store files-goop.
+To make git ignoroop, type filenoop as-is wit' proper casoop, separoop by new lines.
+We can ignoroop one type-o'-set o' files usin' (*) asteroop symbol like dis: *.txt or *.py.
+When we do git add . and git commit, ze .gitignore file itself STILL gets addoop, but ze specific files WE mentoop inside get ignoroop.
+
+To make a .gitignore file in cmd-zorp:
+```bash
+touch .gitignore
+```
+
+To checkoop if it's makoop:
+```bash
+ls -a
+```
+Dis lists ALL files includin' .gitignore, which be invisoop in folder-structoop on GUI-noop.
+
+wagoolzhouse mappoop:
+Picturoop your wagoolzhouse (project folder-noop) got all kindsa ziblets sittoop around — some meant fo' deliveroop, some dat should NEVER leave ze buildin' at all: personoop notes, a spare key hidoop in a drawoop, half-finishoop scrap-goop, empty boxoop.
+Widout instructoop, an eager wagoolzhouse-workoop doin' git add . would grabsy EVERYTHIN' sittoop on floor — even stuff never meant to shippoop — an' loadoop straight into zoomvan.
+.gitignore - dis be a signoop nailoop to ze wagoolzhouse wall, permanoop instructin' every workoop, every single time, b'fore zey loadoop ze van:
+                "No matta whatzza sittoop on floor — skoodle past dese items entiroop. Don' even considoop 'em fo' loadoop. Don' ask, don' addoop 'em to van, don' logoop 'em anywhere-goop."
+
+🛸 *end transmission* 🛸
