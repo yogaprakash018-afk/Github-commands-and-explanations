@@ -1,5 +1,7 @@
 # Git Commands — My Notes
 
+> 📖 **Note:** For a quick raw reference version, see [`explainGit.txt`](./explainGit.txt) — read side-by-side with this formatted guide for the best learning experience!
+
 ## The Shipping Metaphor
 
 ```
@@ -14,7 +16,7 @@ git commit    →  Van departs, delivery is permanently logged (repository histo
 | `git status` | Right now — what's on your desk (unstaged) vs. what's currently loaded in the van (staged), before anything ships |
 | `git log` | History — every shipment that has already departed (every past commit) |
 
-- When running `git log`, it will also show `(HEAD -> main)`, which indicates which branch or which committed state you are on. It's like a stack, where the last or newly committed point is the HEAD/main.
+- When running `git log`, it will also show `(HEAD -> main)`, which indicates which branch or which committed state you are on. It's like a stack, where the last or newly committed point is the HEAD or main branch pointer.
 - When running `git log`, it will also open a pager for scrolling through commits if there are multiple/larger commits. When `(END)` is shown, press `q` to quit out of the pager/log.
 
 ---
@@ -69,7 +71,7 @@ git revert 663da2cbdfd774d6529ad1b4c7905da9f635035c
 git revert --no-edit 663da2cbdfd774d6529ad1b4c7905da9f635035c
 ```
 - Safe to use even after pushing to GitHub — it doesn't rewrite shared history, it only adds to it.
-- Equivalent to: sending a new "correction" shipment that says "disregard/undo what was in that earlier shipment" — the effect is canceled, but the original shipment's record is untouched and still visible.
+- Equivalent to: sending a new "correction" shipment that says "disregard/undo what was in that earlier shipment" — the effect is canceled, but the original shipment's record is untouched and still in the delivery logs.
 
 ---
 
@@ -104,7 +106,7 @@ Pulls `chapter3.txt`'s content from that old commit back onto the working direct
 ## `git branch`
 
 - `git branch` — gives what current branch we're in.
-- `git branch "new-branch"` — a branch is just another route/timeline for the same van, starting from wherever you currently are, and from that point onward it keeps its own separate list of stops (commits) — completely independent of whatever the original route does afterward.
+- `git branch "new-branch"` — a branch is just another route/timeline for the same van, starting from wherever you currently are, and from that point onward it keeps its own separate list of stops (commits) — completely independent from other branches.
 - `git checkout "new-branch"` will switch to this new branch, and so will `git checkout -b "new-branch"` (creates + switches in one step).
 
 ---
