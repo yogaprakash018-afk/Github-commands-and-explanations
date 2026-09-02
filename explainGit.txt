@@ -71,3 +71,10 @@ Show me my saved address book (all remotes, with their nicknames and URLs)
 git rm filename1 filename2 . . . filenameN:
 removes files locally and in remote both together then git add. and git commit.
 to remove only remote files git rm --cached filenameN
+
+.gitignore:
+when a .gitignored file is created we can mention what files we don't want to push into github, ex: .env files, node_module folder, and in mac DS_Store files.
+To make git ignore type the filename as it is with proper casing separated by new lines.
+we can ignore one specific type of set of files using (*) astrisk symbol like this: *.txt or *.py.
+When we do git add . and git commit the .gitignore file will still be added but the specific files we mentioned inside .gitignore will be ignored.
+In warehouse mapping this would be a list of things like say our personal belongings and to make git add . to not accidentaly add our personal belongings into van we need a list or markdown to indicate hey this is my belongings don't add them.
